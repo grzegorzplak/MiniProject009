@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MiniProject009.SM.ExpendituresByCategory>
+
+@{
+    Layout = "_Layout";
+}
+
+<h1>Expenditures by category filter by month - table</h1>
+
+<form asp-controller="Statistics" asp-action="ShowExpendituresByCategoryInTableFilterByMonth" method="post">
+    <div class="row">
+        @if (ViewBag.YearMonth != null)
+        {
+            <select name="yearMonth" class="form-control" asp-items="ViewBag.YearMonth"></select>
+        }
+        <input type="submit" value="Show" />
+        @if (ViewBag.WhichYearMonth != null)
+        {
+            <label>You have chosen: @ViewBag.WhichYearMonth</label>
+        }
+    </div>
+    <div class="row">
+        @if (Model != null)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CategoryName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Total)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                            @Html.DisplayFor(modelItem => item.CategoryName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Total)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</form>
+
